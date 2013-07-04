@@ -1,4 +1,5 @@
-* Overlook at 10,000 meters
+Overlook from 10,000 meters high
+--------------------------------
 
 Marionette router maps urls to actions.  Unlike Rails router, which is a singleton and manages all routes of the application, a Marionette router manages only part of the application's routes.
 
