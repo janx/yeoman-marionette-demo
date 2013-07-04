@@ -19,6 +19,10 @@
 
       });
 
+      Show.MissingContact = Marionette.ItemView.extend({
+        template: "#missing-contact-view"
+      });
+
     });
   });
 }).call( this );
