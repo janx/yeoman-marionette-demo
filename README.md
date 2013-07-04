@@ -3,11 +3,11 @@ Overlook from 10,000 meters high
 
 Marionette router maps urls to actions.  Unlike Rails router, which is a singleton and manages all routes of the application, a Marionette router manages only part of the application's routes.
 
-A simple rule is to create a router for each controller, that's why in Marionette, a router and its correspoding controller's code can reside in a single file, which I called a router-controller pair.
+In Marionette, a simple rule is to create a router for each controller, and a router and its correspoding controller's code can reside in a single file, which I called a router-controller pair.
 
 You can create many router-controller pairs in an application, they together form the routes set.
 
-In client side app, we only create routes for GET methods, like new/show/edit/index, we don't need routes for methods like create/destroy/update in Rails.
+In Marionette, we only create routes for GET methods, like new/show/edit/index, we don't need routes for methods like create/destroy/update in Rails.
 
 Marionette router does two things:
 
@@ -17,7 +17,7 @@ Marionette router does two things:
 
 You should seperate these two responsibility clearly in your code - so don't use `Backbone.history.navigate` with `trigger` set to true!
 
-Each action is put in a Marionette submodule. The action is unfortunately named 'Controller', e.g. `List.Controller` is in fact an action. It's single responsibility is to acts like an action in Rails: get model, give model to view, and render view in a region on page.
+Each action is put in a Marionette submodule. The action is unfortunately named 'Controller', e.g. `List.Controller` is in fact an action. Action is a plain hash, extends nothing. It's single responsibility is to acts like an action in Rails: get model, give model to view, and render view in a region on page.
 
 The view used by an action is placed in the same directory as the action, so all codes related to an action  is placed in a directory, like a Java package.
 
