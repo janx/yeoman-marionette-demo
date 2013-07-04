@@ -14,6 +14,10 @@
             collection: contacts
           });
 
+          contactsListView.on("itemview:contact:show", function(childView, model) {
+            App.trigger("contact:show", model.get('id'));
+          });
+
           contactsListView.on("itemview:contact:delete", function(childView, model) {
             contacts.remove(model);
           });

@@ -27,8 +27,21 @@
                   mainRegion: "#main-region"
                 });
 
+                App.navigate = function(route, options) {
+                  options || (options = {});
+                  Backbone.history.navigate(route, options);
+                };
+
+                App.getCurrentRoute = function() {
+                  return Backbone.history.fragment;
+                };
+
                 App.on("initialize:after", function(){
-                  App.ContactsApp.List.Controller.listContacts();
+                  Backbone.history.start();
+
+                  if(this.getCurrentRoute() === "") {
+                    App.trigger("contacts:list");
+                  }
                 });
 
 		return App;

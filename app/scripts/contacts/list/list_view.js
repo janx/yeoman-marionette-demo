@@ -12,6 +12,7 @@
 
         events: {
           'click': 'highlightName',
+          'click td a.js-show': 'showClicked',
           'click button.js-delete': 'deleteClicked'
         },
 
@@ -19,6 +20,12 @@
           e.preventDefault();
           this.$el.toggleClass('warning');
           console.log("Highlighting toggled on model: ", this.model);
+        },
+
+        showClicked: function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.trigger("contact:show", this.model);
         },
 
         deleteClicked: function(e) {
