@@ -8,7 +8,7 @@
         baseUrl: "/scripts",
 
         /* starting point for application */
-        deps: ['backbone.marionette', 'bootstrap', 'marionette.handlebars', 'main'],
+        deps: ['backbone.localStorage', 'backbone.marionette', 'bootstrap', 'marionette.handlebars', 'main'],
 
 
         shim: {
@@ -55,7 +55,9 @@
             hbs: '../bower_components/require-handlebars-plugin/hbs',
 
             /* marionette and handlebars plugin */
-            'marionette.handlebars': '../bower_components/backbone.marionette.handlebars/backbone.marionette.handlebars'
+            'marionette.handlebars': '../bower_components/backbone.marionette.handlebars/backbone.marionette.handlebars',
+
+            'backbone.localStorage': '../bower_components/backbone.localStorage/backbone.localStorage'
         },
 
         hbs: {

@@ -8,7 +8,7 @@
 
       List.Controller = {
         listContacts: function() {
-          var contacts = App.request("contact:items");
+          var contacts = App.request("contact:entities");
 
           var contactsListView = new List.Contacts({
             collection: contacts
@@ -19,7 +19,7 @@
           });
 
           contactsListView.on("itemview:contact:delete", function(childView, model) {
-            contacts.remove(model);
+            model.destroy();
           });
 
           App.mainRegion.show(contactsListView);

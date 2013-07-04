@@ -6,6 +6,7 @@
     root.require([
 		'backbone',
 		'application',
+                'config/storage/localstorage',
                 'entities/contact',
                 'contacts/contacts_app',
                 'contacts/list/list_view',

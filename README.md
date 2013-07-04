@@ -24,3 +24,14 @@ The view used by an action is placed in the same directory as the action, so all
 Each view is given a template (in any template language). Events can be bind to views, Marionette will take care of binding/events clear when you replace views (I guess it's regions do the job).
 
 Events is used to communicate between Views/Controllers/Routers, never call methods in other components directly.
+
+Persistence Override
+--------------------
+
+Things to check if you want to override default persistence (RESTful API) logic:
+
+* model/collection's `parse`
+* model/collection's `url` and `urlRoot`
+* `Backbone.emulateHTTP`
+* `Backbone.emulateJSON`
+* model/collection's `sync` or `Backbone.sync`

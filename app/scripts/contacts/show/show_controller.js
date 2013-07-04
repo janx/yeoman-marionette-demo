@@ -8,13 +8,12 @@
 
       Show.Controller = {
         showContact: function(id) {
-          var contacts = App.request("contact:items");
-          var model = contacts.get(id);
+          var contact = App.request("contact:entity", id);
           var contactView;
 
-          if(model !== undefined) {
+          if(contact !== undefined) {
             contactView = new Show.Contact({
-              model: model
+              model: contact
             });
           } else {
             contactView = new Show.MissingContact();
