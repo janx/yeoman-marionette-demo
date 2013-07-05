@@ -8,7 +8,16 @@
         baseUrl: "/scripts",
 
         /* starting point for application */
-        deps: ['backbone.localStorage', 'backbone.marionette', 'bootstrap', 'marionette.handlebars', 'main'],
+        deps: [
+          'spin',
+          'jquery.spinjs',
+          'backbone.localStorage',
+          'backbone.marionette',
+          'backbone.syphon',
+          'bootstrap',
+          'marionette.handlebars',
+          'main'
+        ],
 
 
         shim: {
@@ -57,7 +66,10 @@
             /* marionette and handlebars plugin */
             'marionette.handlebars': '../bower_components/backbone.marionette.handlebars/backbone.marionette.handlebars',
 
-            'backbone.localStorage': '../bower_components/backbone.localStorage/backbone.localStorage'
+            'backbone.localStorage': '../bower_components/backbone.localStorage/backbone.localStorage',
+            'spin': "../bower_components/spin.js/dist/spin",
+            'jquery.spinjs': "../bower_components/jquery.spinjs/dist/jquery.spin",
+            "backbone.syphon": "../bower_components/backbone.syphon/lib/amd/backbone.syphon"
         },
 
         hbs: {

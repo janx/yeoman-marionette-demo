@@ -10,11 +10,17 @@
         template: "#contact-view",
 
         events: {
-          'click button.js-back': 'backClicked'
+          'click button.js-back': 'backClicked',
+          'click a.js-edit': 'editClicked'
         },
 
         backClicked: function() {
           App.trigger("contacts:list");
+        },
+
+        editClicked: function(e) {
+          e.preventDefault();
+          this.trigger("contact:edit", this.model);
         }
 
       });

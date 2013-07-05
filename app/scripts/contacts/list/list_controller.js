@@ -8,21 +8,27 @@
 
       List.Controller = {
         listContacts: function() {
-          var contacts = App.request("contact:entities");
+          var loadingView = new App.Common.Views.Loading();
+          App.mainRegion.show(loadingView);
 
-          var contactsListView = new List.Contacts({
-            collection: contacts
+          var fetchingContacts = App.request("contact:entities");
+
+          $.when(fetchingContacts).done(function(contacts) {
+            var contactsListView = new List.Contacts({
+              collection: contacts
+            });
+
+            contactsListView.on("itemview:contact:show", function(childView, model) {
+              App.trigger("contact:show", model.get('id'));
+            });
+
+            contactsListView.on("itemview:contact:delete", function(childView, model) {
+              model.destroy();
+            });
+
+            App.mainRegion.show(contactsListView);
           });
 
-          contactsListView.on("itemview:contact:show", function(childView, model) {
-            App.trigger("contact:show", model.get('id'));
-          });
-
-          contactsListView.on("itemview:contact:delete", function(childView, model) {
-            model.destroy();
-          });
-
-          App.mainRegion.show(contactsListView);
         }
       }
 

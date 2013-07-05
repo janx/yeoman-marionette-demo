@@ -1,3 +1,11 @@
+How To Run
+----------
+
+```
+> bower install
+> grunt server
+```
+
 Overlook from 10,000 meters high
 --------------------------------
 
@@ -35,3 +43,12 @@ Things to check if you want to override default persistence (RESTful API) logic:
 * `Backbone.emulateHTTP`
 * `Backbone.emulateJSON`
 * model/collection's `sync` or `Backbone.sync`
+
+Tips
+----
+
+* Use `$.Deferred` to hide network latency on model.fetch.
+* Use `myCollection.trigger('reset')` to force collection/composite view to re-render.
+* When a view is displayed, Marionette will trigger a 'show' event and execute the view's onShow function.
+* Use `serializeData` in view to provide template extra json data.
+* Define model.validate() for validation, it should return hash of errors by model.validationError on save.

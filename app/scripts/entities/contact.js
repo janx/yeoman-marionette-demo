@@ -9,6 +9,24 @@
       Models.Contact = Backbone.Model.extend({
         urlRoot: "contacts",
 
+        validate: function(attrs, options) {
+          var errors = {};
+
+          if(! attrs.firstName) {
+            errors.firstName = "can't be blank";
+          }
+
+          if(! attrs.lastName) {
+            errors.lastName = "can't be blank";
+          } else if (attrs.lastName.length < 2) {
+            errors.lastName = "is too short";
+          }
+
+          if(! _.isEmpty(errors)) {
+            return errors;
+          }
+        },
+
         defaults: {
           firstName: 'Foo',
           lastName: 'Bar',
@@ -42,25 +60,47 @@
       });
 
       console.log("Contacts web storage initialized.");
-      return contacts;
+      return contacts.models;
     }
 
     var API = {
       getContactEntities: function() {
         var contacts = new App.Models.ContactCollection();
-        contacts.fetch();
+        var defer = $.Deferred();
 
-        if(contacts.length === 0) {
-          return initializeContacts();
-        }
+        contacts.fetch({
+          success: function(data) {
+            defer.resolve(data);
+          }
+        });
 
-        return contacts;
+        var promise = defer.promise();
+        $.when(promise).done(function(contacts) {
+          if(contacts.length === 0) {
+            var models = initializeContacts();
+            contacts.reset(models);
+          }
+        });
+
+        return promise;
       },
 
       getContactEntity: function(contactId) {
         var contact = new App.Models.Contact({id: contactId});
-        contact.fetch();
-        return contact;
+
+        var defer = $.Deferred();
+        setTimeout(function() {
+          contact.fetch({
+            success: function(data) {
+              defer.resolve(data);
+            },
+            error: function(data) {
+              defer.resolve(undefined);
+            }
+          });
+        }, 400);
+
+        return defer.promise();
       }
     }
 

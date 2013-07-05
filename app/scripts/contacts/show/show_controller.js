@@ -8,18 +8,30 @@
 
       Show.Controller = {
         showContact: function(id) {
-          var contact = App.request("contact:entity", id);
-          var contactView;
+          var loadingView = new App.Common.Views.Loading({
+            title: "Artificial Loading Delay"
+          });
+          App.mainRegion.show(loadingView);
 
-          if(contact !== undefined) {
-            contactView = new Show.Contact({
-              model: contact
-            });
-          } else {
-            contactView = new Show.MissingContact();
-          }
+          var fetchingContact = App.request("contact:entity", id);
 
-          App.mainRegion.show(contactView);
+          $.when(fetchingContact).done(function(contact) {
+            var contactView;
+
+            if(contact !== undefined) {
+              contactView = new Show.Contact({
+                model: contact
+              });
+
+              contactView.on("contact:edit", function(contact) {
+                App.trigger("contact:edit", contact.get('id'));
+              });
+            } else {
+              contactView = new Show.MissingContact();
+            }
+
+            App.mainRegion.show(contactView);
+          })
         }
       }
 

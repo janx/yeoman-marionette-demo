@@ -9,7 +9,8 @@
       ContactsApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
           "contacts": "listContacts",
-          "contacts/:id": "showContact"
+          "contacts/:id": "showContact",
+          "contacts/:id/edit": "editContact"
         }
       });
 
@@ -20,6 +21,10 @@
 
         showContact: function(id) {
           ContactsApp.Show.Controller.showContact(id);
+        },
+
+        editContact: function(id) {
+          ContactsApp.Edit.Controller.editContact(id);
         }
       };
 
@@ -31,6 +36,12 @@
       App.on("contact:show", function(id) {
         App.navigate("contacts/" + id);
         API.showContact(id);
+      });
+
+      App.on("contact:edit", function(id) {
+        console.log("edit");
+        App.navigate("contacts/" + id + "/edit");
+        API.editContact(id);
       });
 
       App.addInitializer(function() {
