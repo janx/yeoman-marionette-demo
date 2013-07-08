@@ -24,7 +24,8 @@
 		//});
 
                 App.addRegions({
-                  mainRegion: "#main-region"
+                  mainRegion: "#main-region",
+                  dialogRegion: "#dialog-region"
                 });
 
                 App.navigate = function(route, options) {

@@ -9,6 +9,8 @@
 
         /* starting point for application */
         deps: [
+          'jquery',
+          'jquery-ui',
           'spin',
           'jquery.spinjs',
           'backbone.localStorage',
@@ -69,6 +71,7 @@
             'backbone.localStorage': '../bower_components/backbone.localStorage/backbone.localStorage',
             'spin': "../bower_components/spin.js/dist/spin",
             'jquery.spinjs': "../bower_components/jquery.spinjs/dist/jquery.spin",
+            'jquery-ui': "../bower_components/jquery-ui/ui/jquery-ui",
             "backbone.syphon": "../bower_components/backbone.syphon/lib/amd/backbone.syphon"
         },
 

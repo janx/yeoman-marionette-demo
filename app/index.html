@@ -15,6 +15,7 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/jquery-ui-1.10.0.custom.css">
 
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="bower_components/modernizr/modernizr.js"></script>
@@ -37,6 +38,8 @@
       replaced by our app as soon as we start it.</p>
     </div>
 
+    <div id="dialog-region"></div>
+
     <script type="text/template" id="contact-list-item">
       <td><%= firstName %></td>
       <td><%= lastName %></td>
@@ -44,6 +47,10 @@
         <a href='#contacts/<%= id %>' class="btn btn-small js-show">
           <i class="icon-eye-open"></i>
           Show
+        </a>
+        <a href="#contacts/<%= id %>/edit" class="btn btn-small js-edit">
+          <i class="icon-pencil"></i>
+          Edit
         </a>
         <button class="btn btn-small js-delete">
           <i class="icon-remove"></i>
@@ -82,7 +89,6 @@
     </script>
 
     <script type="text/template" id="contact-form">
-      <h1>Edit <%= firstName %> <%= lastName %></h1>
       <form>
         <div class="control-group">
           <label for="contact-firstName" class="control-label">First name:</label>

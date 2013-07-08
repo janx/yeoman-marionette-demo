@@ -22,6 +22,25 @@
               App.trigger("contact:show", model.get('id'));
             });
 
+            contactsListView.on("itemview:contact:edit", function(childView, model) {
+              var view = new App.ContactsApp.Edit.Contact({
+                model: model,
+                asModal: true
+              });
+
+              view.on("form:submit", function(data) {
+                if(model.save(data)) {
+                  childView.render();
+                  App.dialogRegion.close();
+                  childView.flash("success");
+                } else {
+                  view.triggerMethod("form:data:invalid", model.validationError);
+                }
+              });
+
+              App.dialogRegion.show(view);
+            });
+
             contactsListView.on("itemview:contact:delete", function(childView, model) {
               model.destroy();
             });
