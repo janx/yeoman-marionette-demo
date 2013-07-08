@@ -6,7 +6,24 @@
   root.define([ 'application' ], function(App){
     App.module('ContactsApp.List', function(List, App, Backbone, Marionette, $, _) {
 
-      List.Contact = Backbone.Marionette.ItemView.extend({
+      List.Layout = Marionette.Layout.extend({
+        template: "#contact-list-layout",
+
+        regions: {
+          panelRegion: "#panel-region",
+          contactsRegion: "#contacts-region"
+        }
+      });
+
+      List.Panel = Marionette.ItemView.extend({
+        template: "#contact-list-panel",
+
+        triggers: {
+          'click button.js-new': "contact:new"
+        }
+      });
+
+      List.Contact = Marionette.ItemView.extend({
         tagName: "tr",
         template: "#contact-list-item",
 
@@ -61,7 +78,21 @@
         className: "table table-hover",
         template: "#contact-list",
         itemView: List.Contact,
-        ItemViewContainer: "tbody"
+        ItemViewContainer: "tbody",
+
+        initialize: function() {
+          this.listenTo(this.collection, "reset", function() {
+            this.appendHtml = function(collectionView, itemView, index) {
+              collectionView.$el.append(itemView.el);
+            };
+          });
+        },
+
+        onCompositeCollectionRendered: function() {
+          this.appendHtml = function(collectionView, itemView, index) {
+            collectionView.$el.prepend(itemView.el);
+          };
+        }
       });
 
     });

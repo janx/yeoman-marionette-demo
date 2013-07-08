@@ -28,9 +28,9 @@
         },
 
         defaults: {
-          firstName: 'Foo',
-          lastName: 'Bar',
-          phoneNumber: "No phone number!"
+          firstName: '',
+          lastName: '',
+          phoneNumber: '' 
         }
       });
 
