@@ -25,7 +25,9 @@
 
                 App.addRegions({
                   mainRegion: "#main-region",
-                  dialogRegion: "#dialog-region"
+                  dialogRegion: Backbone.Marionette.Region.Dialog.extend({
+                    el: "#dialog-region"
+                  })
                 });
 
                 App.navigate = function(route, options) {

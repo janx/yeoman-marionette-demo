@@ -7,7 +7,11 @@
     App.module('ContactsApp.New', function(New, App, Backbone, Marionette, $, _) {
 
       New.Contact = App.ContactsApp.Common.Views.Form.extend({
-        title: "New Contact"
+        title: "New Contact",
+
+        onRender: function() {
+          this.$el.find(".js-submit").text("Create contact");
+        }
       });
 
     });

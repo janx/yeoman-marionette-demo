@@ -7,6 +7,7 @@
 		'backbone',
 		'application',
                 'config/storage/localstorage',
+                'config/marionette/regions/dialog',
                 'common/views',
                 'entities/contact',
                 'contacts/contacts_app',

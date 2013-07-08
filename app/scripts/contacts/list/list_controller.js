@@ -30,8 +30,7 @@
               var newContact = new App.Models.Contact();
 
               var view = new App.ContactsApp.New.Contact({
-                model: newContact,
-                asModal: true
+                model: newContact
               });
 
               view.on("form:submit", function(data) {
@@ -40,7 +39,7 @@
 
                 if(newContact.save(data)) {
                   contacts.add(newContact);
-                  App.dialogRegion.close();
+                  view.trigger("dialog:close");
                   contactsListView.children.findByModel(newContact).flash("success");
                 } else {
                   view.triggerMethod("form:data:invalid", newContact.validationError);
@@ -56,14 +55,13 @@
 
             contactsListView.on("itemview:contact:edit", function(childView, model) {
               var view = new App.ContactsApp.Edit.Contact({
-                model: model,
-                asModal: true
+                model: model
               });
 
               view.on("form:submit", function(data) {
                 if(model.save(data)) {
                   childView.render();
-                  App.dialogRegion.close();
+                  view.trigger("dialog:close");
                   childView.flash("success");
                 } else {
                   view.triggerMethod("form:data:invalid", model.validationError);
