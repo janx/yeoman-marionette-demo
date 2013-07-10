@@ -9,6 +9,7 @@
                 'config/storage/localstorage',
                 'config/marionette/regions/dialog',
                 'common/views',
+                'entities/common',
                 'entities/contact',
                 'contacts/contacts_app',
                 'contacts/common/views',

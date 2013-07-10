@@ -7,7 +7,7 @@
     App.module('ContactsApp.List', function(List, App, Backbone, Marionette, $, _) {
 
       List.Controller = {
-        listContacts: function() {
+        listContacts: function(criterion) {
           var loadingView = new App.Common.Views.Loading();
           App.mainRegion.show(loadingView);
 
@@ -17,13 +17,39 @@
           var contactsListPanel = new List.Panel();
 
           $.when(fetchingContacts).done(function(contacts) {
+            var filteredContacts = App.Models.FilteredCollection({
+              collection: contacts,
+              filterFunction: function(filterCriterion) {
+                var criterion = filterCriterion.toLowerCase();
+                return function(contact) {
+                  if(contact.get('firstName').toLowerCase().indexOf(criterion) !== -1
+                  || contact.get('lastName').toLowerCase().indexOf(criterion) !== -1
+                  || contact.get('phoneNumber').toLowerCase().indexOf(criterion) !== -1) {
+                    return contact;
+                  }
+                };
+              }
+            });
+
+            if(criterion) {
+              filteredContacts.filter(criterion);
+              contactsListPanel.once("show", function() {
+                contactsListPanel.triggerMethod("set:filter:criterion", criterion);
+              });
+            }
+
             var contactsListView = new List.Contacts({
-              collection: contacts
+              collection: filteredContacts
             });
 
             contactsListLayout.on("show", function() {
               contactsListLayout.panelRegion.show(contactsListPanel);
               contactsListLayout.contactsRegion.show(contactsListView);
+            });
+
+            contactsListPanel.on("contacts:filter", function(filterCriterion) {
+              filteredContacts.filter(filterCriterion);
+              App.trigger("contacts:filter", filterCriterion);
             });
 
             contactsListPanel.on("contact:new", function() {
@@ -40,7 +66,11 @@
                 if(newContact.save(data)) {
                   contacts.add(newContact);
                   view.trigger("dialog:close");
-                  contactsListView.children.findByModel(newContact).flash("success");
+
+                  var newContactView = contactsListView.children.findByModel(newContact);
+                  if(newContactView) {
+                    newContactView.flash('success');
+                  }
                 } else {
                   view.triggerMethod("form:data:invalid", newContact.validationError);
                 }

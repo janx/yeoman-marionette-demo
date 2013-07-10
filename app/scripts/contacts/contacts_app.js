@@ -8,15 +8,15 @@
 
       ContactsApp.Router = Marionette.AppRouter.extend({
         appRoutes: {
-          "contacts": "listContacts",
+          "contacts(?filter=:criterion)": "listContacts",
           "contacts/:id": "showContact",
           "contacts/:id/edit": "editContact"
         }
       });
 
       var API = {
-        listContacts: function() {
-          ContactsApp.List.Controller.listContacts();
+        listContacts: function(criterion) {
+          ContactsApp.List.Controller.listContacts(criterion);
         },
 
         showContact: function(id) {
@@ -27,6 +27,14 @@
           ContactsApp.Edit.Controller.editContact(id);
         }
       };
+
+      App.on("contacts:filter", function(criterion) {
+        if(criterion) {
+          App.navigate("contacts?filter=" + criterion);
+        } else {
+          App.navigate("contacts");
+        }
+      });
 
       App.on("contacts:list", function() {
         App.navigate("contacts");

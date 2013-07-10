@@ -31,7 +31,7 @@ The view used by an action is placed in the same directory as the action, so all
 
 Each view is given a template (in any template language). Events can be bind to views, Marionette will take care of binding/events clear when you replace views (I guess it's regions do the job).
 
-Views respond to dom events, but they should not be responsible for processing those events. Instead, views pass necessary informations to controller by triggering new events. Controller then coordinate everything needed to respond to user actions.
+Views respond to dom events, but they should not be responsible for processing those events. Instead, views only collect necessary informations to procced and broadcast those data by triggering event. Usually it's controller listen to such event and do the rest.
 
 Events is used to communicate between Views/Controllers/Routers, never call methods in other components directly.
 

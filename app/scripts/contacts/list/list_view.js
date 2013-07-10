@@ -20,6 +20,23 @@
 
         triggers: {
           'click button.js-new': "contact:new"
+        },
+
+        events: {
+          'click button.js-filter': 'filterClicked'
+        },
+
+        ui: {
+          criterion: "input.js-filter-criterion"
+        },
+
+        filterClicked: function() {
+          var criterion = this.$el.find(".js-filter-criterion").val();
+          this.trigger("contacts:filter", criterion);
+        },
+
+        onSetFilterCriterion: function(criterion) {
+          $(this.ui.criterion).val(criterion);
         }
       });
 
@@ -73,10 +90,17 @@
 
       });
 
+      var NoContactsView = Backbone.Marionette.ItemView.extend({
+        template: "#contact-list-none",
+        tagName: "tr",
+        className: "alert"
+      });
+
       List.Contacts = Backbone.Marionette.CompositeView.extend({
         tagName: "table",
         className: "table table-hover",
         template: "#contact-list",
+        emptyView: NoContactsView,
         itemView: List.Contact,
         ItemViewContainer: "tbody",
 
@@ -96,5 +120,6 @@
       });
 
     });
+
   });
 }).call( this );
