@@ -24,6 +24,7 @@
 		//});
 
                 App.addRegions({
+                  headerRegion: "#header-region",
                   mainRegion: "#main-region",
                   dialogRegion: Backbone.Marionette.Region.Dialog.extend({
                     el: "#dialog-region"

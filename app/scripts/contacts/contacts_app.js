@@ -17,14 +17,17 @@
       var API = {
         listContacts: function(criterion) {
           ContactsApp.List.Controller.listContacts(criterion);
+          App.HeaderApp.List.Controller.setActiveHeader("contacts");
         },
 
         showContact: function(id) {
           ContactsApp.Show.Controller.showContact(id);
+          App.HeaderApp.List.Controller.setActiveHeader("contacts");
         },
 
         editContact: function(id) {
           ContactsApp.Edit.Controller.editContact(id);
+          App.HeaderApp.List.Controller.setActiveHeader("contacts");
         }
       };
 

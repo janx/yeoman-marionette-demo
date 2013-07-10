@@ -25,13 +25,7 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <span class="brand">Contact manager</span>
-        </div>
-      </div>
-    </div>
+    <div id="header-region"></div>
 
     <div id="main-region" class="container">
       <p>Here is static content in the web page. You'll notice that it gets
@@ -39,6 +33,21 @@
     </div>
 
     <div id="dialog-region"></div>
+
+    <script type="text/template" id="header-template">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#contacts">Contact manager</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav"></ul>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="header-link">
+      <a href="#<%= url %>"><%= name %></a>
+    </script>
 
     <script type="text/template" id="contact-list-item">
       <td><%= firstName %></td>
@@ -130,6 +139,12 @@
 
     <script type="text/template" id="contact-list-none">
       <td colspan="3">No contacts to display.</td>
+    </script>
+
+    <script type="text/template" id="about-message">
+      <h1>About</h1>
+      <p>This application was designed to accompany you during your learning.</p>
+      <p>Wuwala!</p>
     </script>
 
     <!-- build:js scripts/main.js -->
