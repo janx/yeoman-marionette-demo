@@ -54,3 +54,11 @@ Tips
 * When a view is displayed, Marionette will trigger a 'show' event and execute the view's onShow function.
 * Use `serializeData` in view to provide template extra json data.
 * Define model.validate() for validation, it should return hash of errors by model.validationError on save.
+
+Think About These:
+------------------
+
+* What's the difference between backbone app and rails app?
+* What's router? Why rails, a MVC framework, has R?
+* A view to rule them all or a view for each model?
+* Why backbone router.navigate()'s trigger option default to false?
