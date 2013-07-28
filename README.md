@@ -9,7 +9,7 @@ How To Run
 Overlook from 10,000 meters high
 --------------------------------
 
-Marionette router maps urls to actions.  Unlike Rails router, which is a singleton and manages all routes of the application, a Marionette router manages only part of the application's routes.
+Marionette router maps urls to controllers (actions).  Unlike Rails router, which is a singleton and manages all routes of the application, a Marionette router manages only part of the application's routes.
 
 In Marionette, a simple rule is to create a router for each controller, and a router and its correspoding controller's code can reside in a single file, which I called a router-controller pair.
 
@@ -19,15 +19,15 @@ In Marionette, we only create routes for GET methods, like new/show/edit/index, 
 
 Marionette router does two things:
 
-1. when user changes browser url (either by enter directly or click back/forward button), call corresponding action to update app's state.
+1. when user changes browser url (either by enter directly or click back/forward button), call corresponding controller (action) to update app's state.
 
 2. when app's state updated, change browser's url to reflect the change if neccessary.
 
 You should seperate these two responsibility clearly in your code - so don't use `Backbone.history.navigate` with `trigger` set to true!
 
-Each action is put in a Marionette submodule. The action is unfortunately named 'Controller', e.g. `List.Controller` is in fact an action. Action is a plain hash, extends nothing. It's single responsibility is to acts like an action in Rails: get model, give model to view, and render view in a region on page.
+Each controller is put in a Marionette submodule. Rails controller has many actions, and each action is bind with a view. But in classical MVC view is bind with controller, which is the way Marionette does. e.g. `List.Controller` is in fact an 'action'. Such a controller (action) is a plain hash, extends nothing. It's single responsibility is to acts like an action in Rails: get model, give model to view, and render view in a region on page.
 
-The view used by an action is placed in the same directory as the action, so all codes related to an action  is placed in a directory, like a Java package.
+The view used by a controller is placed in the same directory as the action, so all codes related to a controller is placed in a directory, like a Java package.
 
 Each view is given a template (in any template language). Events can be bind to views, Marionette will take care of binding/events clear when you replace views (I guess it's regions do the job).
 
